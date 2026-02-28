@@ -13,6 +13,13 @@ internal static class Guard
         if (value == null)
             throw new DomainException($"The {parameterName} cannot be null.");
     }
+
+    public static void AgainstNullOrEmpty(string value, string parameterName)
+    {
+        if (string.IsNullOrEmpty(value))
+            throw new DomainException($"The {parameterName} cannot be null or empty.");
+    }
+
     public static void Against<TException>(bool condition, string message) where TException : Exception
     {
         if (condition)
