@@ -1,4 +1,4 @@
-﻿namespace Company.Sales.Domain;
+﻿namespace Company.Sales.Domain.Common.Exceptions;
 
 public class DomainException : Exception
 {

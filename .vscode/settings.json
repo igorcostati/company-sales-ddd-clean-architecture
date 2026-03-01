@@ -1,0 +1,8 @@
+{
+    "dotnet.unitTestDebuggingOptions": {
+        "console": "integratedTerminal"
+    },
+    "testing.automaticallyOpenPeekView": "failure",
+    "testing.followRunningTest": true,
+    "dotnet.tests.runSettingsPath": ".runsettings"
+}

@@ -1,6 +1,9 @@
 ﻿using System.Text.RegularExpressions;
+using Company.Sales.Domain.Common.Base;
+using Company.Sales.Domain.Common.Exceptions;
+using Company.Sales.Domain.Common.Validations;
 
-namespace Company.Sales.Domain;
+namespace Company.Sales.Domain.ValuesObjects;
 
 public class DeliveryAddress : ValueObject
 {
@@ -23,7 +26,7 @@ public class DeliveryAddress : ValueObject
         Guard.AgainstNullOrEmpty(country, nameof(country));
 
         if (!Regex.IsMatch(zipCode ?? "", @"^\d{5}-\d{3}$"))
-            throw new ArgumentException("Invalid zip code format. Expected format: 12345-678");
+            throw new DomainException("Invalid zip code format. Expected format: 12345-678");
 
         ZipCode = zipCode!;
         Street = street;
@@ -34,8 +37,14 @@ public class DeliveryAddress : ValueObject
         Country = country;
     }
 
-    public static DeliveryAddress Create(string zipCode, string street, string complement,
-    string neighborhood, string city, string state, string country)
+    public static DeliveryAddress Create(
+          string zipCode
+        , string street
+        , string complement
+        , string neighborhood
+        , string city
+        , string state
+        , string country)
     {
         return new DeliveryAddress(zipCode, street, complement, neighborhood, city, state, country);
     }

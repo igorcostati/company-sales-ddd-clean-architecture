@@ -1,4 +1,4 @@
-﻿namespace Company.Sales.Domain;
+﻿namespace Company.Sales.Domain.Common.Base;
 
 public abstract class ValueObject
 {
