@@ -1,4 +1,6 @@
-﻿namespace Company.Sales.Domain.Common.Base;
+﻿using Company.Sales.Domain.Events;
+
+namespace Company.Sales.Domain.Common.Base;
 
 public abstract class Entity
 {
@@ -41,4 +43,19 @@ public abstract class Entity
     {
         return !(left == right);
     }
+
+    private readonly List<IDomainEvent> _domainEvents = new();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    protected void AddDomainEvent(IDomainEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
+    }
+
+    public void RemoveDomainEvent(IDomainEvent domainEvent)
+    {
+        _domainEvents.Remove(domainEvent);
+    }
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
 }
