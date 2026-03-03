@@ -4,7 +4,7 @@ using Company.Sales.Domain.Entities;
 using Company.Sales.Domain.Events;
 using FluentAssertions;
 
-namespace Company.Sales.Domain.Test;
+namespace Company.Sales.Domain.Test.Entities;
 
 public class PaymentTest
 {

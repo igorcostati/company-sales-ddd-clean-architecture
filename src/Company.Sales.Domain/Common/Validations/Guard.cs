@@ -9,13 +9,16 @@ internal static class Guard
         if (value == Guid.Empty)
             throw new DomainException(message ?? $"The {parameterName} cannot be Guid.Empty.");
     }
-
     public static void AgainstNull<T>(T value, string parameterName)
     {
         if (value == null)
             throw new DomainException($"The {parameterName} cannot be null.");
     }
-
+    public static void AgainstNull<T>(T value, string parameterName, string message)
+    {
+        if (value == null)
+            throw new DomainException(message);
+    }
     public static void AgainstNullOrEmpty(string value, string parameterName)
     {
         if (string.IsNullOrEmpty(value))
@@ -26,7 +29,6 @@ internal static class Guard
         if (string.IsNullOrWhiteSpace(value))
             throw new DomainException(message ?? $"The {parameterName} cannot be null, empty or whitespace.");
     }
-
     public static void Against<TException>(bool condition, string message) where TException : Exception
     {
         if (condition)
