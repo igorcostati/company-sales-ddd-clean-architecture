@@ -1,4 +1,4 @@
-﻿namespace Company.Sales.Domain.Events;
+﻿namespace Company.Sales.Domain.Common.Interfaces;
 
 public interface IDomainEvent
 {

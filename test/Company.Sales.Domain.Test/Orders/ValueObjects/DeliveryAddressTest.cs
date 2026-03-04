@@ -1,8 +1,8 @@
 ﻿using Company.Sales.Domain.Common.Exceptions;
-using Company.Sales.Domain.ValuesObjects;
+using Company.Sales.Domain.Orders.ValuesObjects;
 using FluentAssertions;
 
-namespace Company.Sales.Domain.Test.ValueObjects;
+namespace Company.Sales.Domain.Test.Orders.ValueObjects;
 
 public class DeliveryAddressTest
 {

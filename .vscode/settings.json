@@ -5,4 +5,13 @@
     "testing.automaticallyOpenPeekView": "failure",
     "testing.followRunningTest": true,
     "dotnet.tests.runSettingsPath": ".runsettings"
+    ,"material-icon-theme.folders.associations": { 
+        "entities": "class",
+        "valueobjects": "class",
+        "valuesobjects": "class",
+        "ValuesObjects": "class",
+        "events": "messages",  
+        "exceptions": "error",  
+        "aggregates": "class",  
+    }
 }

@@ -1,9 +1,9 @@
 ﻿using Company.Sales.Domain.Common.Base;
 using Company.Sales.Domain.Common.Exceptions;
-using Company.Sales.Domain.Entities;
+using Company.Sales.Domain.Orders.Entities;
 using FluentAssertions;
 
-namespace Company.Sales.Domain.Test.Entities;
+namespace Company.Sales.Domain.Test.Orders.Entities;
 
 public class OrderItemTest
 {

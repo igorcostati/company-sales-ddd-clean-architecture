@@ -3,7 +3,7 @@ using Company.Sales.Domain.Common.Base;
 using Company.Sales.Domain.Common.Exceptions;
 using Company.Sales.Domain.Common.Validations;
 
-namespace Company.Sales.Domain.ValuesObjects;
+namespace Company.Sales.Domain.Orders.ValuesObjects;
 
 public class DeliveryAddress : ValueObject
 {

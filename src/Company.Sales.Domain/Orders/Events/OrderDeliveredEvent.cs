@@ -1,6 +1,6 @@
-﻿using Company.Sales.Domain.Events;
+﻿using Company.Sales.Domain.Common.Base;
 
-namespace Company.Sales.Domain.Events;
+namespace Company.Sales.Domain.Orders.Events;
 
 public sealed record OrderDeliveredEvent(
     Guid OrderId,

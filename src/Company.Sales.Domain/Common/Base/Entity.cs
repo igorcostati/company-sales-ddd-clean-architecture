@@ -1,4 +1,4 @@
-﻿using Company.Sales.Domain.Events;
+﻿using Company.Sales.Domain.Common.Interfaces; 
 
 namespace Company.Sales.Domain.Common.Base;
 

@@ -1,7 +1,8 @@
-﻿using Company.Sales.Domain.Common.Enums;
-using Company.Sales.Domain.ValuesObjects;
+﻿using Company.Sales.Domain.Common.Base;
+using Company.Sales.Domain.Common.Enums;
+using Company.Sales.Domain.Orders.ValuesObjects;
 
-namespace Company.Sales.Domain.Events;
+namespace Company.Sales.Domain.Orders.Events;
 
 public sealed record OrderCancelledEvent(
     Guid OrderId,

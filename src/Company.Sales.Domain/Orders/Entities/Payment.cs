@@ -2,9 +2,9 @@
 using Company.Sales.Domain.Common.Enums;
 using Company.Sales.Domain.Common.Exceptions;
 using Company.Sales.Domain.Common.Validations;
-using Company.Sales.Domain.Events;
+using Company.Sales.Domain.Orders.Events;
 
-namespace Company.Sales.Domain.Entities;
+namespace Company.Sales.Domain.Orders.Entities;
 
 public sealed class Payment : Entity
 {

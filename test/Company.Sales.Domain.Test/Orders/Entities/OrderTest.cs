@@ -1,11 +1,12 @@
 ﻿using System.Reflection;
 using Company.Sales.Domain.Common.Enums;
 using Company.Sales.Domain.Common.Exceptions;
-using Company.Sales.Domain.Events;
-using Company.Sales.Domain.ValuesObjects;
+using Company.Sales.Domain.Orders.Events;
+using Company.Sales.Domain.Orders.Entities;
+using Company.Sales.Domain.Orders.ValuesObjects;
 using FluentAssertions;
 
-namespace Company.Sales.Domain.Test.Entities;
+namespace Company.Sales.Domain.Test.Orders.Entities;
 
 public class OrderTest
 {
