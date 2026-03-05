@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
-using Company.Sales.Domain.Common.Enums;
 using Company.Sales.Domain.Common.Exceptions;
 using Company.Sales.Domain.Orders.Events;
 using Company.Sales.Domain.Orders.Entities;
 using Company.Sales.Domain.Orders.ValuesObjects;
 using FluentAssertions;
+using Company.Sales.Domain.Orders.Enums;
 
 namespace Company.Sales.Domain.Test.Orders.Entities;
 

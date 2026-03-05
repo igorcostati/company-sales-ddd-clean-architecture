@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Catalog\Entities\" />
+    <Folder Include="Catalog\Enums\" />
+    <Folder Include="Catalog\Events\" />
+    <Folder Include="Catalog\ValueObjects\" />
+    <Folder Include="Common\Enums\" />
+  </ItemGroup>
+
 </Project>

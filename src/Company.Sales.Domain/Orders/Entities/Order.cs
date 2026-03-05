@@ -1,7 +1,7 @@
 ﻿using Company.Sales.Domain.Common.Base;
-using Company.Sales.Domain.Common.Enums;
 using Company.Sales.Domain.Common.Exceptions;
-using Company.Sales.Domain.Common.Validations; 
+using Company.Sales.Domain.Common.Validations;
+using Company.Sales.Domain.Orders.Enums;
 using Company.Sales.Domain.Orders.Events;
 using Company.Sales.Domain.Orders.ValuesObjects;
 

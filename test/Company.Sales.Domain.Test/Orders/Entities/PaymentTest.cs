@@ -1,6 +1,6 @@
-﻿using Company.Sales.Domain.Common.Enums;
-using Company.Sales.Domain.Common.Exceptions;
+﻿using Company.Sales.Domain.Common.Exceptions;
 using Company.Sales.Domain.Orders.Entities;
+using Company.Sales.Domain.Orders.Enums;
 using Company.Sales.Domain.Orders.Events;
 using FluentAssertions;
 

@@ -1,4 +1,4 @@
-namespace Company.Sales.Domain.Common.Enums;
+namespace Company.Sales.Domain.Orders.Enums;
 
 public enum OrderStatus
 {

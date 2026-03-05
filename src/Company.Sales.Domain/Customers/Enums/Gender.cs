@@ -1,4 +1,4 @@
-namespace Company.Sales.Domain.Common.Enums;
+namespace Company.Sales.Domain.Customers.Enums;
 
 public enum Gender
 {
