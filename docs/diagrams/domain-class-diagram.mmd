@@ -1,0 +1,177 @@
+---
+title: Company Sales Domain - Class Diagram
+---
+classDiagram
+    direction LR
+
+    %% Common
+    class Entity {
+        <<abstract>>
+        +Guid Id
+        +DateTime CreatedAt
+        +DateTime UpdatedAt
+    }
+    class AggregateRoot {
+        <<abstract>>
+    }
+    class ValueObject {
+        <<abstract>>
+    }
+    class IDomainEvent {
+        <<interface>>
+        +DateTime DateOccurred
+    }
+    class DomainEventBase {
+        <<abstract>>
+        +DateTime DateOccurred
+    }
+    class DomainException
+    class Guard {
+        <<utility>>
+    }
+
+    Entity <|-- AggregateRoot
+    IDomainEvent <|.. DomainEventBase
+
+    %% Catalog
+    class Catalog_Category["Catalog.Category"]
+    class Catalog_Product["Catalog.Product"]
+    class Catalog_ProductName["Catalog.ProductName"]
+    class Catalog_ProductCode["Catalog.ProductCode"]
+    class Catalog_ProductPrice["Catalog.ProductPrice"]
+    class Catalog_ProductImage["Catalog.ProductImage"]
+    class Catalog_ProductStatus {
+        <<enumeration>>
+    }
+
+    AggregateRoot <|-- Catalog_Category
+    AggregateRoot <|-- Catalog_Product
+    ValueObject <|-- Catalog_ProductName
+    ValueObject <|-- Catalog_ProductCode
+    ValueObject <|-- Catalog_ProductPrice
+    ValueObject <|-- Catalog_ProductImage
+
+    Catalog_Category "1" <-- "*" Catalog_Product : categoryId
+    Catalog_Product *-- Catalog_ProductName
+    Catalog_Product *-- Catalog_ProductCode
+    Catalog_Product *-- Catalog_ProductPrice
+    Catalog_Product *-- Catalog_ProductImage
+    Catalog_Product --> Catalog_ProductStatus
+
+    class Catalog_CategoryActivatedEvent["Catalog.CategoryActivatedEvent"]
+    class Catalog_CategoryDeactivatedEvent["Catalog.CategoryDeactivatedEvent"]
+    class Catalog_ProductActivatedEvent["Catalog.ProductActivatedEvent"]
+    class Catalog_ProductDeactivatedEvent["Catalog.ProductDeactivatedEvent"]
+    class Catalog_ProductPriceChangedEvent["Catalog.ProductPriceChangedEvent"]
+    class Catalog_StockAdjustedEvent["Catalog.StockAdjustedEvent"]
+    class Catalog_ImageAddedEvent["Catalog.ImageAddedEvent"]
+
+    DomainEventBase <|-- Catalog_CategoryActivatedEvent
+    DomainEventBase <|-- Catalog_CategoryDeactivatedEvent
+    DomainEventBase <|-- Catalog_ProductActivatedEvent
+    DomainEventBase <|-- Catalog_ProductDeactivatedEvent
+    DomainEventBase <|-- Catalog_ProductPriceChangedEvent
+    DomainEventBase <|-- Catalog_StockAdjustedEvent
+    DomainEventBase <|-- Catalog_ImageAddedEvent
+
+    Catalog_Category ..> Catalog_CategoryActivatedEvent
+    Catalog_Category ..> Catalog_CategoryDeactivatedEvent
+    Catalog_Product ..> Catalog_ProductActivatedEvent
+    Catalog_Product ..> Catalog_ProductDeactivatedEvent
+    Catalog_Product ..> Catalog_ProductPriceChangedEvent
+    Catalog_Product ..> Catalog_StockAdjustedEvent
+    Catalog_Product ..> Catalog_ImageAddedEvent
+
+    %% Customers
+    class Customers_Customer["Customers.Customer"]
+    class Customers_Address["Customers.Address"]
+    class Customers_FullName["Customers.FullName"]
+    class Customers_Cpf["Customers.Cpf"]
+    class Customers_Email["Customers.Email"]
+    class Customers_Phone["Customers.Phone"]
+    class Customers_CustomerStatus {
+        <<enumeration>>
+    }
+    class Customers_Gender {
+        <<enumeration>>
+    }
+    class Customers_MaritalStatus {
+        <<enumeration>>
+    }
+
+    AggregateRoot <|-- Customers_Customer
+    Entity <|-- Customers_Address
+    ValueObject <|-- Customers_FullName
+    ValueObject <|-- Customers_Cpf
+    ValueObject <|-- Customers_Email
+    ValueObject <|-- Customers_Phone
+
+    Customers_Customer *-- Customers_FullName
+    Customers_Customer *-- Customers_Cpf
+    Customers_Customer *-- Customers_Email
+    Customers_Customer *-- Customers_Phone
+    Customers_Customer *-- Customers_Address : addresses
+    Customers_Customer --> Customers_CustomerStatus
+    Customers_Customer --> Customers_Gender
+    Customers_Customer --> Customers_MaritalStatus
+
+    class Customers_CustomerRegisteredEvent["Customers.CustomerRegisteredEvent"]
+    class Customers_CustomerBlockedEvent["Customers.CustomerBlockedEvent"]
+    class Customers_PrimaryAddressChangedEvent["Customers.PrimaryAddressChangedEvent"]
+
+    DomainEventBase <|-- Customers_CustomerRegisteredEvent
+    DomainEventBase <|-- Customers_CustomerBlockedEvent
+    DomainEventBase <|-- Customers_PrimaryAddressChangedEvent
+
+    Customers_Customer ..> Customers_CustomerRegisteredEvent
+    Customers_Customer ..> Customers_CustomerBlockedEvent
+    Customers_Customer ..> Customers_PrimaryAddressChangedEvent
+
+    %% Orders
+    class Orders_Order["Orders.Order"]
+    class Orders_OrderItem["Orders.OrderItem"]
+    class Orders_Payment["Orders.Payment"]
+    class Orders_DeliveryAddress["Orders.DeliveryAddress"]
+    class Orders_CancellationReason["Orders.CancellationReason"]
+    class Orders_OrderStatus {
+        <<enumeration>>
+    }
+    class Orders_PaymentStatus {
+        <<enumeration>>
+    }
+    class Orders_PaymentMethod {
+        <<enumeration>>
+    }
+
+    AggregateRoot <|-- Orders_Order
+    Entity <|-- Orders_OrderItem
+    Entity <|-- Orders_Payment
+    ValueObject <|-- Orders_DeliveryAddress
+    ValueObject <|-- Orders_CancellationReason
+
+    Orders_Order *-- Orders_DeliveryAddress
+    Orders_Order *-- Orders_OrderItem
+    Orders_Order *-- Orders_Payment
+    Orders_Order --> Orders_OrderStatus
+    Orders_Payment --> Orders_PaymentStatus
+    Orders_Payment --> Orders_PaymentMethod
+    Orders_OrderItem ..> Catalog_Product : productId
+    Orders_Order ..> Customers_Customer : customerId
+
+    class Orders_OrderShippedEvent["Orders.OrderShippedEvent"]
+    class Orders_OrderDeliveredEvent["Orders.OrderDeliveredEvent"]
+    class Orders_OrderCancelledEvent["Orders.OrderCancelledEvent"]
+    class Orders_PaymentApprovedEvent["Orders.PaymentApprovedEvent"]
+    class Orders_PaymentRejectedEvent["Orders.PaymentRejectedEvent"]
+
+    DomainEventBase <|-- Orders_OrderShippedEvent
+    DomainEventBase <|-- Orders_OrderDeliveredEvent
+    DomainEventBase <|-- Orders_OrderCancelledEvent
+    DomainEventBase <|-- Orders_PaymentApprovedEvent
+    DomainEventBase <|-- Orders_PaymentRejectedEvent
+
+    Orders_Order ..> Orders_OrderShippedEvent
+    Orders_Order ..> Orders_OrderDeliveredEvent
+    Orders_Order ..> Orders_OrderCancelledEvent
+    Orders_Payment ..> Orders_PaymentApprovedEvent
+    Orders_Payment ..> Orders_PaymentRejectedEvent
