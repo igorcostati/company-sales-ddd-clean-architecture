@@ -1,90 +1,113 @@
 # Company Sales | DDD + Clean Architecture
 
-Projeto de portfólio para demonstrar modelagem de domínio, aplicação de regras de negócio e organização arquitetural com foco em **DDD (Domain-Driven Design)** e **Clean Architecture**.
+Projeto de demonstração técnica para evidenciar modelagem de domínio rica com **DDD (Domain-Driven Design)** e organização orientada a **Clean Architecture**.
 
-## 🎯 Objetivo do projeto
+## Objetivo
 
-Evidenciar minha abordagem de engenharia de software para construção de domínios ricos, com:
+Demonstrar construção de um domínio com foco em:
 
-- regras explícitas e protegidas por invariantes
+- invariantes e regras de negócio explícitas
 - entidades e value objects com responsabilidades claras
-- eventos de domínio para mudanças relevantes de estado
-- testes automatizados para segurança de evolução
+- eventos de domínio para sinalizar mudanças relevantes
+- testes automatizados como rede de segurança para evolução
 
-## 🧱 Escopo atual
+## Status atual
 
-Atualmente o foco está na camada **Domain**, já com implementação funcional e coberta por testes.
+A camada **Domain** está concluída para esta demonstração, organizada em **3 bounded contexts**:
 
-### Core do domínio
+- `Catalog`
+- `Customers`
+- `Orders`
 
-- `Entity` com identidade, auditoria (`CreatedAt`, `UpdatedAt`) e suporte a Domain Events
-- `ValueObject` com igualdade por componentes
-- `DomainException` para violações de negócio
-- `Guard` para validações reutilizáveis e invariantes
+## Estrutura da solução
 
-### Tipos de domínio (Enums)
+```text
+Company.Sales.slnx
+src/
+	Company.Sales.Domain/
+		Common/
+		Catalog/
+		Customers/
+		Orders/
+test/
+	Company.Sales.Domain.Test/
+```
 
-- `OrderStatus`
-- `PaymentMethod`
-- `PaymentStatus`
-- `Gender`
-- `MaritalStatus`
+## Diagrama de classes (Domain)
 
-### Entidades implementadas
+- Arquivo Mermaid: [docs/diagrams/domain-class-diagram.mmd](docs/diagrams/domain-class-diagram.mmd)
 
-#### `OrderItem`
+## Core compartilhado (`Common`)
 
-- validações na criação
-- cálculo de total do item
-- aplicação de desconto com limite máximo
-- adição/remoção de unidades com proteção contra estado inválido
-- atualização de preço unitário
+- `Entity`: identidade, auditoria (`CreatedAt`, `UpdatedAt`) e controle de Domain Events
+- `AggregateRoot`: base para agregados
+- `ValueObject`: igualdade por componentes
+- `DomainEventBase` + `IDomainEvent`: contrato e implementação base para eventos
+- `DomainException`: exceção de regra de negócio
+- `Guard`: validações reutilizáveis para proteção de invariantes
 
-#### `Payment`
+## Bounded Contexts
 
-- inicialização com status `Pending`
-- validação de método e valor
-- geração local de código transacional (`GenerateLocalTransactionCode`)
-- confirmação e rejeição com transição de estado controlada
-- emissão de eventos em aprovação/rejeição
+### Catalog
 
-### Value Object implementado
+- Entidades: `Category`, `Product`
+- Value Objects: `ProductName`, `ProductCode`, `ProductPrice`, `ProductImage`
+- Enum: `ProductStatus`
+- Eventos:
+	- `CategoryActivatedEvent`
+	- `CategoryDeactivatedEvent`
+	- `ProductActivatedEvent`
+	- `ProductDeactivatedEvent`
+	- `ProductPriceChangedEvent`
+	- `StockAdjustedEvent`
+	- `ImageAddedEvent`
 
-#### `DeliveryAddress`
+### Customers
 
-- factory method (`Create`)
-- validação de obrigatoriedade dos campos
-- validação de CEP no padrão `12345-678`
-- igualdade por valor
-- formatação amigável para exibição (`FormatAddress`)
+- Entidades: `Customer`, `Address`
+- Value Objects: `FullName`, `Cpf`, `Email`, `Phone`
+- Enums: `CustomerStatus`, `Gender`, `MaritalStatus`
+- Eventos:
+	- `CustomerRegisteredEvent`
+	- `CustomerBlockedEvent`
+	- `PrimaryAddressChangedEvent`
 
-### Eventos de domínio
+### Orders
 
-- `PaymentApprovedEvent`
-- `PaymentRejectedEvent`
+- Entidades: `Order`, `OrderItem`, `Payment`
+- Value Objects: `DeliveryAddress`, `CancellationReason`
+- Enums: `OrderStatus`, `PaymentMethod`, `PaymentStatus`
+- Eventos:
+	- `OrderShippedEvent`
+	- `OrderDeliveredEvent`
+	- `OrderCancelledEvent`
+	- `PaymentApprovedEvent`
+	- `PaymentRejectedEvent`
 
-## ✅ Qualidade e testes
+## Testes automatizados
 
-Suíte de testes de domínio com:
+Cobertura atual da camada de domínio com testes por contexto:
 
-- `OrderItemTest`
-- `PaymentTest`
-- `DeliveryAddressTest`
+- `Catalog`: `CategoryTest`, `ProductTest`
+- `Customers`: `AddressTest`, `CustomerTests`
+- `Orders`: `OrderTest`, `OrderItemTest`, `PaymentTest`, `DeliveryAddressTest`
 
-Resultado atual da execução:
+Ultima execucao (`dotnet test` em 2026-03-06):
 
-- **33 testes passando**
-- **0 falhas**
+- Total: `121`
+- Sucesso: `121`
+- Falhas: `0`
+- Ignorados: `0`
 
-## ▶️ Como executar
+## Como executar
 
 ```bash
+dotnet build
 dotnet test
 ```
 
-## 🗺️ Próximos passos
+## Próximos passos
 
-- evoluir agregados e regras de consistência entre entidades
-- iniciar camada de Application (casos de uso)
-- adicionar infraestrutura de persistência e integrações
-- ampliar testes para cenários de integração entre camadas
+- iniciar camada de `Application` com casos de uso
+- projetar contratos da camada `Infrastructure` (persistência e integrações)
+- evoluir testes para cenários de integração entre camadas
