@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Company.Sales.Domain/Company.Sales.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstractions/" />
+    <Folder Include="Abstractions/Persistence/" />
+    <Folder Include="Commands/" />
+    <Folder Include="Commands/Orders/" />
+    <Folder Include="Commands/Orders/AddItemToOrder/" />
+    <Folder Include="Commands/Orders/CancelOrder/" />
+    <Folder Include="Commands/Orders/CreateOrder/" />
+    <Folder Include="Commands/Orders/MarkOrderAsDelivered/" />
+    <Folder Include="Commands/Orders/MarkOrderAsShipped/" />
+    <Folder Include="Commands/Orders/RemoveItemFromOrder/" />
+    <Folder Include="Commands/Orders/StartPayment/" />
+    <Folder Include="Commands/Orders/UpdateDeliveryAddress/" />
+  </ItemGroup>
+
+</Project>
